@@ -1,5 +1,5 @@
 #Source: https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/bot/__main__.py
-
+from aiofiles.os import path as aiopath
 from asyncio import create_subprocess_shell
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from pyrogram.handlers import MessageHandler
@@ -16,7 +16,7 @@ from bot.helper.ext_utils.filters import CustomFilters
 
 
 async def stats(client, message):
-    if ospath.exists('.git'):
+    if aiopath.exists('.git'):
         proc = await create_subprocess_shell("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'")
         stdout, _ = await proc.communicate()
         last_commit = stdout
