@@ -12,12 +12,13 @@ from bot.helper.ext_utils.bot_commands import BotCommands
 from bot.helper.ext_utils.bot_utils import get_readable_time
 from bot.helper.ext_utils.human_format import get_readable_file_size
 from bot.helper.ext_utils.filters import CustomFilters
+from bot.helper.ext_utils.bot_utils import cmd_exec
 
 
 
 async def stats(client, message):
     if aiopath.exists('.git'):
-        proc = await create_subprocess_shell("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'")
+        proc = await cmd_exec("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'")
         stdout, _ = await proc.communicate()
         last_commit = stdout
     else:
